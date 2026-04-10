@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎙️ PodcastStudio
+
+A professional, browser-only podcast recording and publishing app built with Next.js, TypeScript, and Tailwind CSS.
+
+## Features
+
+- **Record** — capture audio directly in the browser with a live waveform meter
+- **Edit** — denoise, normalize, and export episodes as WAV or MP3
+- **Manage** — episode library with Draft → Ready → Live status pipeline
+- **Publish** — generate a valid RSS 2.0 / iTunes feed and deploy to GitHub Pages in one click
+- **Submit** — direct links to submit your feed to Podcast Index, Spotify, and Apple Podcasts
+
+## Tech Stack
+
+| Layer | Choice |
+|-------|--------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS v4 + shadcn/ui (base-ui) |
+| Audio | Web Audio API, WaveSurfer.js, @breezystack/lamejs |
+| Storage | IndexedDB (via `idb`) |
+| Publishing | GitHub REST API → GitHub Pages |
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Publishing a Podcast
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Fill in your **Podcast Profile** in Settings
+2. Record and edit episodes, set each to **Live** status
+3. Go to **Publish** → GitHub Deploy
+4. Enter a [GitHub Personal Access Token](https://github.com/settings/tokens/new?scopes=repo,pages&description=PodcastStudio) with `repo` and `pages` scopes
+5. Click **Deploy to GitHub Pages** — your RSS feed will be live at `https://<username>.github.io/<repo>/feed.xml`
+6. Submit that URL to Podcast Index, Spotify, or Apple Podcasts
 
-## Learn More
+> ⚠️ Your GitHub PAT is stored only in your browser's `localStorage` and is never committed to source control.
 
-To learn more about Next.js, take a look at the following resources:
+## Security
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- No backend — all processing happens in the browser
+- No secrets in source code
+- `.env*` files are git-ignored
+- Audio data is stored locally in IndexedDB only
