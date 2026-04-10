@@ -110,6 +110,17 @@ Open [http://localhost:3000](http://localhost:3000).
 
 > Your PAT is stored only in `localStorage` in your browser. It is never committed to source control or sent anywhere except the GitHub API.
 
+### Two repos, one clear purpose
+
+When you click Deploy, PodcastStudio creates a **second GitHub repository** — separate from this code repo — to host your podcast content:
+
+| Repository | What it contains | Who it's for |
+|-----------|-----------------|--------------|
+| `podcast-studio` ← **this repo** | App source code (TypeScript, components, config) | Developers / you |
+| `<your-podcast-name>` ← **created on deploy** | `feed.xml` + `episodes/*.mp3` served via GitHub Pages | Your listeners & podcast directories |
+
+Your recorded audio and RSS feed **never touch this code repository**. They live in a dedicated content repo with its own GitHub Pages URL. This keeps code and content cleanly separated.
+
 ---
 
 ## Security
