@@ -77,10 +77,7 @@ export async function encodeToMp3(
   if (finalChunk.length > 0) mp3Chunks.push(finalChunk);
 
   opts.onProgress?.(100);
-  return new Blob(
-    mp3Chunks.map((c) => new Uint8Array(c.buffer as ArrayBuffer, c.byteOffset, c.length)),
-    { type: 'audio/mp3' }
-  );
+  return new Blob(mp3Chunks, { type: 'audio/mp3' });
 }
 
 export function formatDuration(seconds: number): string {
