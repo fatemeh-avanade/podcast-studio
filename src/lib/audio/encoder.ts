@@ -66,7 +66,7 @@ export async function encodeToMp3(
       numChannels > 1
         ? encoder.encodeBuffer(left, right)
         : encoder.encodeBuffer(left);
-    if (encoded.length > 0) mp3Chunks.push(encoded);
+    if (encoded.length > 0) mp3Chunks.push(encoded as Uint8Array);
 
     if (i % (blockSize * 50) === 0) {
       opts.onProgress?.(20 + Math.round((i / leftInt.length) * 75));
@@ -74,7 +74,7 @@ export async function encodeToMp3(
   }
 
   const finalChunk = encoder.flush();
-  if (finalChunk.length > 0) mp3Chunks.push(finalChunk);
+  if (finalChunk.length > 0) mp3Chunks.push(finalChunk as Uint8Array);
 
   opts.onProgress?.(100);
   return new Blob(mp3Chunks, { type: 'audio/mp3' });
