@@ -43,7 +43,7 @@ export async function encodeToMp3(
   const kbps = 128;
   const encoder = new Mp3Encoder(numChannels, sampleRate, kbps);
 
-  const mp3Chunks: Int8Array[] = [];
+  const mp3Chunks: Uint8Array[] = [];
   const blockSize = 1152;
   const leftData = decoded.getChannelData(0);
   const rightData = numChannels > 1 ? decoded.getChannelData(1) : leftData;
